@@ -17,6 +17,12 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    /**
+     * Method to get events from Reha
+     *
+     * @param model model with events
+     * @return model
+     */
     @GetMapping(value = "")
     public String sendSchedules(Model model) {
         model.addAttribute("events", eventService.getEvents());

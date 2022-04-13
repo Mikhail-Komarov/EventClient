@@ -34,14 +34,25 @@ public class EventService {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * Method to get updated events from message broker
+     *
+     * @param message message
+     * @throws JsonProcessingException if converting error is exists
+     */
     @JmsListener(destination = EVENT_RESPONSE_QUEUE)
     public void updateEvents(String message) throws JsonProcessingException {
-        events = objectMapper.readValue(message,new TypeReference<List<Event>>() {
+        events = objectMapper.readValue(message, new TypeReference<List<Event>>() {
         });
         messageTemplate.convertAndSend("/update", "Events");
         log.info("Event update was successful");
     }
 
+    /**
+     * Method to get events after start
+     *
+     * @throws JsonProcessingException if converting error is exists
+     */
     @PostConstruct
     public void initEvents() throws JsonProcessingException {
         try {
@@ -52,13 +63,16 @@ public class EventService {
             events = objectMapper.readValue(response, new TypeReference<List<Event>>() {
             });
             log.info("Initialization of events was successful");
-        }
-        catch (ProcessingException e)
-        {
+        } catch (ProcessingException e) {
             log.error("Reha connection error " + e);
         }
     }
 
+    /**
+     * Method to get events
+     *
+     * @return events
+     */
     public List<Event> getEvents() {
         return events;
     }
