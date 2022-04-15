@@ -18,7 +18,7 @@
         <table class="table table-striped table-hover table-bordered">
             <thead>
             <tr>
-                <th>Name</th>
+                <th>Patient</th>
                 <th>Time</th>
                 <th>Doctor</th>
                 <th>Status</th>
