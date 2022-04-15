@@ -23,10 +23,15 @@ import java.util.List;
 @Service
 public class EventService {
     private List<Event> events;
+    private String connectionMessage;
     private final SimpMessagingTemplate messageTemplate;
     private final ObjectMapper objectMapper;
     private final String EVENT_RESPONSE_QUEUE = "QUEUE";
     private static final String target = "http://localhost:8080/event/today";
+
+    public String getConnectionMessage() {
+        return connectionMessage;
+    }
 
     @Autowired
     public EventService(SimpMessagingTemplate messageTemplate, ObjectMapper objectMapper) {
@@ -64,6 +69,7 @@ public class EventService {
             });
             log.info("Initialization of events was successful");
         } catch (ProcessingException e) {
+            connectionMessage = "Reha connection error!";
             log.error("Reha connection error " + e);
         }
     }
@@ -74,6 +80,9 @@ public class EventService {
      * @return events
      */
     public List<Event> getEvents() {
+        if (events!=null){
+            connectionMessage = "";
+        }
         return events;
     }
 

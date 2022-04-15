@@ -26,6 +26,7 @@ public class EventController {
     @GetMapping(value = "")
     public String sendSchedules(Model model) {
         model.addAttribute("events", eventService.getEvents());
+        model.addAttribute("connectionMessage", eventService.getConnectionMessage());
         model.addAttribute("date", LocalDate.now());
         return "event";
     }

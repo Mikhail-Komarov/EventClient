@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="card text-center">
+    <h3>${connectionMessage}</h3>
     <div>Events by today (${date}):</div>
     <div class="card-body">
         <table class="table table-striped table-hover table-bordered">
